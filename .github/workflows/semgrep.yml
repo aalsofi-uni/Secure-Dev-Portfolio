@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 name: Security Scan (Semgrep)
 
 on:
@@ -26,3 +27,6 @@ jobs:
         with:
           name: semgrep-results
           path: semgrep-results.json
+=======
+
+>>>>>>> 97f95c79796cbdb0aebb22275970b9ebdd6350c4
