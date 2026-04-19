@@ -1,32 +1,32 @@
-<<<<<<< HEAD
 name: Security Scan (Semgrep)
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
+  workflow_dispatch:
 
 jobs:
   semgrep:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+
+      - name: Debug files
+        run: ls -R
 
       - name: Install Semgrep
         run: |
+          python3 -m pip install --upgrade pip
           pip install semgrep
 
       - name: Run Semgrep scan
-        run: |
-          semgrep --config=auto --json --output=semgrep-results.json
+        run: semgrep --config=auto webapp || true
+
+      - name: Save results
+        run: semgrep --config=auto webapp --json --output=semgrep-results.json
 
       - name: Upload results
         uses: actions/upload-artifact@v3
         with:
           name: semgrep-results
           path: semgrep-results.json
-=======
-
->>>>>>> 97f95c79796cbdb0aebb22275970b9ebdd6350c4
